@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+*.sqlite3
+
+# Streamlit specific
+.streamlit/
+*.pydevproject
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Environment
+.env
+.env.*
+.venv/
+venv/
+ENV/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# VS Code settings
+.vscode/
+*.code-workspace
+
+# macOS
+.DS_Store
+
+# ChromaDB persistent directory
+chroma_db/
+
+# Captions and output data
+captions/
+captions_output.json
+
+# yt-dlp download temp files
+*.part
+*.vtt
+
+# Misc
+*.bak
+*.swp
+*~
