@@ -80,14 +80,17 @@ def process_playlist(playlist_url):
     all_data = []
 
     for video_url in video_urls:
-        video_id = video_url.split("v=")[-1].split("&")[0]
-        print(f"🎬 Processing {video_url}")
-        found_captions = download_caption(video_url)
-        if not found_captions:
-            print(f"⚠️ No captions found for {video_id} (manual or auto-generated)")
-            continue
-        chunks = parse_vtt(video_id)
-        all_data.extend(chunks)
+        try:
+          video_id = video_url.split("v=")[-1].split("&")[0]
+          print(f"🎬 Processing {video_url}")
+          found_captions = download_caption(video_url)
+          if not found_captions:
+              print(f"⚠️ No captions found for {video_id} (manual or auto-generated)")
+              continue
+          chunks = parse_vtt(video_id)
+          all_data.extend(chunks)
+        except Exception as e:
+            print(f"❌ Error processing {video_url}: {e}")
 
     with open("captions_output.json", "w", encoding="utf-8") as f:
         json.dump(all_data, f, indent=2)
