@@ -8,3 +8,4 @@ tqdm
 protobuf>=3.20,<3.21
 opentelemetry-sdk
 opentelemetry-exporter-otlp-proto-grpc
+pysqlite3-binary

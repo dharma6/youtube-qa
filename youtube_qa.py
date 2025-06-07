@@ -1,5 +1,11 @@
 from typing import List
 from openai import OpenAI
+
+# Fix for Streamlit Cloud SQLite3 version issue
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 from chromadb import PersistentClient
 import os
 import streamlit as st
