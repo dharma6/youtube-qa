@@ -6,13 +6,15 @@ from openai import OpenAI
 import chromadb
 from chromadb import PersistentClient
 import tiktoken
+import streamlit as st
+
 
 # === CONFIG ===
 DATA_FILE = "captions_output.json"
 DB_DIR = "chroma_db"
 COLLECTION_NAME = "youtube_captions"
 EMBEDDING_MODEL = "text-embedding-3-small"
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
 # === INIT ===
 client = OpenAI(api_key=OPENAI_API_KEY)
 chroma_client = PersistentClient(path=DB_DIR)

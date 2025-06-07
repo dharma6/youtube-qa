@@ -2,8 +2,9 @@ from typing import List
 from openai import OpenAI
 from chromadb import PersistentClient
 import os
+import streamlit as st
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
 EMBEDDING_MODEL = "text-embedding-3-small"
 GPT_MODEL = "gpt-4o-mini"
 CHROMA_PATH = "chroma_db"

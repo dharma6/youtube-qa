@@ -1,0 +1,7 @@
+streamlit
+yt_dlp
+webvtt-py
+openai
+tiktoken
+chromadb
+tqdm
