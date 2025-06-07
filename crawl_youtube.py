@@ -94,7 +94,5 @@ def process_playlist(playlist_url):
 
     print(f"✅ Done! Total chunks extracted: {len(all_data)}")
 
-# === MAIN ===
-if __name__ == "__main__":
-    playlist_url = "https://www.youtube.com/playlist?list=PL6vuS4RZTskXFiWLVYH-0_8NBq4yYx053"
+def process_playlist_and_embed(playlist_url):
     process_playlist(playlist_url)

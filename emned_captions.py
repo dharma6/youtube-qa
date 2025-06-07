@@ -56,44 +56,45 @@ def smart_group_captions(captions, max_tokens=180):
 
     return grouped
 
-# === LOAD & PROCESS CAPTIONS ===
-with open(DATA_FILE, "r", encoding="utf-8") as f:
-    data = json.load(f)
+  # === LOAD & PROCESS CAPTIONS ===
+def embed_captions():
+  with open(DATA_FILE, "r", encoding="utf-8") as f:
+      data = json.load(f)
 
-print(f"📄 Loaded {len(data)} caption chunks")
+  print(f"📄 Loaded {len(data)} caption chunks")
 
-# === SMART GROUPING ===
-grouped_data = smart_group_captions(data)
-print(f"📄 Grouped into {len(grouped_data)} semantically optimized chunks")
+  # === SMART GROUPING ===
+  grouped_data = smart_group_captions(data)
+  print(f"📄 Grouped into {len(grouped_data)} semantically optimized chunks")
 
-# === BATCHING & EMBEDDING ===
-batch_size = 100
-for i in tqdm(range(0, len(grouped_data), batch_size), desc="📦 Embedding & Storing"):
-    batch = grouped_data[i:i + batch_size]
-    texts = [entry['text'] for entry in batch]
+  # === BATCHING & EMBEDDING ===
+  batch_size = 100
+  for i in tqdm(range(0, len(grouped_data), batch_size), desc="📦 Embedding & Storing"):
+      batch = grouped_data[i:i + batch_size]
+      texts = [entry['text'] for entry in batch]
 
-    response = client.embeddings.create(
-        model=EMBEDDING_MODEL,
-        input=texts
-    )
-    embeddings = [e.embedding for e in response.data]
+      response = client.embeddings.create(
+          model=EMBEDDING_MODEL,
+          input=texts
+      )
+      embeddings = [e.embedding for e in response.data]
 
-    metadatas = [
-        {
-            "video_id": entry["video_id"],
-            "start": entry["start"],
-            "end": entry["end"],
-            "url": entry["url"]
-        } for entry in batch
-    ]
+      metadatas = [
+          {
+              "video_id": entry["video_id"],
+              "start": entry["start"],
+              "end": entry["end"],
+              "url": entry["url"]
+          } for entry in batch
+      ]
 
-    ids = [str(uuid.uuid4()) for _ in batch]
+      ids = [str(uuid.uuid4()) for _ in batch]
 
-    collection.add(
-        ids=ids,
-        documents=texts,
-        embeddings=embeddings,
-        metadatas=metadatas
-    )
+      collection.add(
+          ids=ids,
+          documents=texts,
+          embeddings=embeddings,
+          metadatas=metadatas
+      )
 
-print("✅ Done embedding and storing to Chroma.")
+  print("✅ Done embedding and storing to Chroma.")
