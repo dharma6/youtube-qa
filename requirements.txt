@@ -3,8 +3,8 @@ yt_dlp
 webvtt-py
 openai
 tiktoken
-chromadb==0.3.28
+chromadb
 tqdm
-protobuf==3.20.3
-opentelemetry-sdk==1.21.0
-opentelemetry-exporter-otlp-proto-grpc==1.21.0
+protobuf
+opentelemetry-sdk
+opentelemetry-exporter-otlp-proto-grpc
