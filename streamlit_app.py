@@ -115,4 +115,4 @@ if question:
         """, unsafe_allow_html=True)
 
 st.markdown("---")
-st.caption("Built with ❤️ using Streamlit + OpenAI + ChromaDB")
+st.caption("Built with ❤️ by Dharma Bandaru using Streamlit + OpenAI + ChromaDB")
